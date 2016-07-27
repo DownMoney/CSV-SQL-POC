@@ -19,7 +19,11 @@ class Converter
         $counter = 0;
 
         foreach ($reader as $row) {
-            $row['Answers'] = explode(',', $row['Answers']);
+            if (strlen($row['Answers']) > 0) {
+                $row['Answers'] = explode(',', $row['Answers']);
+            } else {
+                $row['Answers'] = [];
+            }
 
             if (!array_key_exists($row['Form'], $data)) {
                 $counter++;

@@ -103,6 +103,34 @@ class ConverterTests extends TestCase
         $this->assertEquals($expectedSQL, $sql);
     }
 
+    public function testConvertType2() {
+        $expectedSQL = [
+            "INSERT INTO 'questionnaire' VALUES (1, 'Test Form', 1);",
+            "INSERT INTO 'question' VALUES (1, 1, 'Test Question', 'Test Question', 0, 0, 2);",
+        ];
+
+        $data =
+            [
+
+                'Test Form' => [
+                    'order' => 1,
+                    'questions' => [
+                        [
+                            'Question' => 'Test Question',
+                            'Type' => '2',
+                            'Multiple Choice' => '0',
+                            'Answers' => []
+                        ]
+                    ]
+                ]
+            ];
+
+        $converter = new Converter();
+        $sql = $converter->convert($data);
+
+        $this->assertEquals($expectedSQL, $sql);
+    }
+
     public function testConvert2Questions()
     {
         $expectedSQL = [
@@ -242,6 +270,7 @@ class ConverterTests extends TestCase
             "INSERT INTO 'choice' VALUES (7, 3, 'Ans 1');",
             "INSERT INTO 'choice' VALUES (8, 3, 'Ans 2');",
             "INSERT INTO 'choice' VALUES (9, 3, 'Ans 3');",
+            "INSERT INTO 'question' VALUES (4, 2, 'Test Question 4', 'Test Question 4', 1, 0, 2);",
         ];
 
         $fileName = realpath(__DIR__.'/../data/sample.csv');
