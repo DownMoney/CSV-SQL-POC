@@ -20,7 +20,7 @@
 
 # User-specific stuff:
 .idea
-error.html
+output.html
 web/data_directory
 
 ## File-based project format:
