@@ -2,9 +2,13 @@
 
 namespace AppBundle\Controller;
 
+use Ddeboer\DataImport\Reader\CsvReader;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
+use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
+use SplFileObject;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 
 class DefaultController extends Controller
 {
@@ -17,5 +21,28 @@ class DefaultController extends Controller
         return $this->render('default/index.html.twig', [
             'base_dir' => realpath($this->getParameter('kernel.root_dir').'/..'),
         ]);
+    }
+
+    /**
+     * @Route("/upload", name="upload")
+     * @Method("POST")
+     */
+    public function uploadData(Request $request)
+    {
+        $fileName = $this->get('app.data_uploader')->upload($request->files->get('file'));
+        $file = new SplFileObject($fileName);
+        $reader = new CsvReader($file);
+        $reader->setHeaderRowNumber(0);
+
+        $data = [];
+
+        foreach ($reader as $row) {
+            $row['Answers'] = explode(',', $row['Answers']);
+            var_dump($row);
+        }
+
+        $sql = $this->get('app.converter')->convert($data);
+
+        return new Response('hi');
     }
 }

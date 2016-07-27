@@ -4,6 +4,8 @@ parameters:
 #    parameter_name: value
 
 services:
-#    service_name:
-#        class: AppBundle\Directory\ClassName
-#        arguments: ["@another_service_name", "plain_value", "%parameter_name%"]
+  app.data_uploader:
+        class: AppBundle\FileUploader
+        arguments: ['data_directory']
+  app.converter:
+          class: AppBundle\Converter
