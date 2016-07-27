@@ -244,7 +244,7 @@ class ConverterTests extends TestCase
             "INSERT INTO 'choice' VALUES (9, 3, 'Ans 3');",
         ];
 
-        $fileName = realpath('data/sample.csv');
+        $fileName = realpath(__DIR__.'/../data/sample.csv');
         $converter = new Converter();
         $file = new SplFileObject($fileName);
 
