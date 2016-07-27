@@ -21,18 +21,16 @@ class Converter
         foreach ($reader as $row) {
             $row['Answers'] = explode(',', $row['Answers']);
 
-            if (!in_array($row['Form'], $data)) {
-                $formOrder []= $row['Form'];
+            if (!array_key_exists($row['Form'], $data)) {
+                $counter++;
+                $data[$row['Form']] = [
+                    'order' => $counter,
+                    'questions' => []
+                ];
             }
 
-            if (!in_array($row['Form'], $dict)) {
-                $dict[$row['Form']] = [];
-            }
-
-            $dict[$row['Form']] []= $row;
+            $data[$row['Form']]['questions'] []= $row;
         }
-
-
 
         return $this->convert($data);
     }
