@@ -31,18 +31,11 @@ class DefaultController extends Controller
     {
         $fileName = $this->get('app.data_uploader')->upload($request->files->get('file'));
         $file = new SplFileObject($fileName);
-        $reader = new CsvReader($file);
-        $reader->setHeaderRowNumber(0);
 
-        $data = [];
+        $sql = $this->get('app.converter')->convertFromFile($file);
 
-        foreach ($reader as $row) {
-            $row['Answers'] = explode(',', $row['Answers']);
-            var_dump($row);
-        }
-
-        $sql = $this->get('app.converter')->convert($data);
-
-        return new Response('hi');
+        return $this->render('default/sql.html.twig', [
+            'data' => $sql
+        ]);
     }
 }

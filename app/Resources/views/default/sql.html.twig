@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block body %}
+    <div id="wrapper">
+        <pre>
+        {% for sql in data %}
+            {{ sql }}
+        {% endfor %}
+        </pre>
+    </div>
+{% endblock %}
+
+

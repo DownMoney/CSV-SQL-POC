@@ -20,7 +20,8 @@
 
 # User-specific stuff:
 .idea
-
+error.html
+web/data_directory
 
 ## File-based project format:
 *.iws
