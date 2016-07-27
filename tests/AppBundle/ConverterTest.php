@@ -21,7 +21,6 @@ class ConverterTests extends TestCase
 
         $data =
             [
-
                 'Test Form' => [
                     'order' => 1,
                     'questions' => [
@@ -62,7 +61,6 @@ class ConverterTests extends TestCase
 
         $data =
             [
-
                 'Test Form' => [
                     'order' => 1,
                     'questions' => [
@@ -78,7 +76,6 @@ class ConverterTests extends TestCase
                         ]
                     ]
                 ],
-
                 'Test Form 2' => [
                     'order' => 2,
                     'questions' => [
@@ -94,7 +91,6 @@ class ConverterTests extends TestCase
                         ]
                     ]
                 ]
-
             ];
 
         $converter = new Converter();
@@ -103,7 +99,8 @@ class ConverterTests extends TestCase
         $this->assertEquals($expectedSQL, $sql);
     }
 
-    public function testConvertType2() {
+    public function testConvertType2()
+    {
         $expectedSQL = [
             "INSERT INTO 'questionnaire' VALUES (1, 'Test Form', 1);",
             "INSERT INTO 'question' VALUES (1, 1, 'Test Question', 'Test Question', 0, 0, 2);",
@@ -111,7 +108,6 @@ class ConverterTests extends TestCase
 
         $data =
             [
-
                 'Test Form' => [
                     'order' => 1,
                     'questions' => [
@@ -147,7 +143,6 @@ class ConverterTests extends TestCase
 
         $data =
             [
-
                 'Test Form' => [
                     'order' => 1,
                     'questions' => [
@@ -173,7 +168,6 @@ class ConverterTests extends TestCase
                         ]
                     ]
                 ]
-
             ];
 
         $converter = new Converter();
@@ -203,7 +197,6 @@ class ConverterTests extends TestCase
 
         $data =
             [
-
                 'Test Form' => [
                     'order' => 1,
                     'questions' => [
@@ -229,7 +222,6 @@ class ConverterTests extends TestCase
                         ]
                     ]
                 ],
-
                 'Test Form 2' => [
                     'order' => 2,
                     'questions' => [
@@ -253,8 +245,8 @@ class ConverterTests extends TestCase
         $this->assertEquals($expectedSQL, $sql);
     }
 
-    public function testConvertFromFile() {
-
+    public function testConvertFromFile()
+    {
         $expectedSQL = [
             "INSERT INTO 'questionnaire' VALUES (1, 'Test Form', 1);",
             "INSERT INTO 'question' VALUES (1, 1, 'Test Question', 'Test Question', 0, 0, 1);",
@@ -273,7 +265,7 @@ class ConverterTests extends TestCase
             "INSERT INTO 'question' VALUES (4, 2, 'Test Question 4', 'Test Question 4', 1, 0, 2);",
         ];
 
-        $fileName = realpath(__DIR__.'/../data/sample.csv');
+        $fileName = realpath(__DIR__ . '/../data/sample.csv');
         $converter = new Converter();
         $file = new SplFileObject($fileName);
 
