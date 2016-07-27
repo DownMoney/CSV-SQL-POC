@@ -3,20 +3,45 @@
 namespace AppBundle;
 
 
+use Ddeboer\DataImport\Reader\CsvReader;
+
 class Converter
 {
     private $formCounter = 0;
     private $questionCounter = 0;
     private $choiceCounter = 0;
 
+    public function convertFromFile($file) {
+        $reader = new CsvReader($file);
+        $reader->setHeaderRowNumber(0);
+
+        $data = [];
+        $counter = 0;
+
+        foreach ($reader as $row) {
+            $row['Answers'] = explode(',', $row['Answers']);
+
+            if (!in_array($row['Form'], $data)) {
+                $formOrder []= $row['Form'];
+            }
+
+            if (!in_array($row['Form'], $dict)) {
+                $dict[$row['Form']] = [];
+            }
+
+            $dict[$row['Form']] []= $row;
+        }
+
+
+
+        return $this->convert($data);
+    }
+
     public function convert($data) {
         $sql = [];
 
-        foreach ($data as $form) {
-            $formName = $form[0];
-            $questions = $form[1];
-
-            $sql = array_merge($sql, $this->convertForm($formName, $questions));
+        foreach ($data as $formName => $questions) {
+            $sql = array_merge($sql, $this->convertForm($formName, $questions['questions']));
         }
 
         return $sql;

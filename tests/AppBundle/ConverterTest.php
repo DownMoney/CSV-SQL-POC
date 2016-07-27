@@ -20,9 +20,10 @@ class ConverterTests extends TestCase
 
         $data =
             [
-                [
-                    'Test Form',
-                    [
+
+                'Test Form' => [
+                    'order' => 1,
+                    'questions' => [
                         [
                             'Question' => 'Test Question',
                             'Type' => '1',
@@ -35,7 +36,6 @@ class ConverterTests extends TestCase
                         ]
                     ]
                 ]
-
             ];
 
         $converter = new Converter();
@@ -61,9 +61,10 @@ class ConverterTests extends TestCase
 
         $data =
             [
-                [
-                    'Test Form',
-                    [
+
+                'Test Form' => [
+                    'order' => 1,
+                    'questions' => [
                         [
                             'Question' => 'Test Question',
                             'Type' => '1',
@@ -76,9 +77,10 @@ class ConverterTests extends TestCase
                         ]
                     ]
                 ],
-                [
-                    'Test Form 2',
-                    [
+
+                'Test Form 2' => [
+                    'order' => 2,
+                    'questions' => [
                         [
                             'Question' => 'Test Question 2',
                             'Type' => '1',
@@ -116,9 +118,10 @@ class ConverterTests extends TestCase
 
         $data =
             [
-                [
-                    'Test Form',
-                    [
+
+                'Test Form' => [
+                    'order' => 1,
+                    'questions' => [
                         [
                             'Question' => 'Test Question',
                             'Type' => '1',
@@ -171,9 +174,10 @@ class ConverterTests extends TestCase
 
         $data =
             [
-                [
-                    'Test Form',
-                    [
+
+                'Test Form' => [
+                    'order' => 1,
+                    'questions' => [
                         [
                             'Question' => 'Test Question',
                             'Type' => '1',
@@ -196,9 +200,10 @@ class ConverterTests extends TestCase
                         ]
                     ]
                 ],
-                [
-                    'Test Form 2',
-                    [
+
+                'Test Form 2' => [
+                    'order' => 2,
+                    'questions' => [
                         [
                             'Question' => 'Test Question 3',
                             'Type' => '1',
